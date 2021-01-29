@@ -1,12 +1,13 @@
-import Vue from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
-Vue.config.productionTip = false;
+import vueCustomElement from 'vue-custom-element'
+import '@ungap/custom-elements'
 
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount("#app");
+Vue.use(vueCustomElement)
+
+App.store = store
+App.router = router
+Vue.customElement('weather-widget', App)
