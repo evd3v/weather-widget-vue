@@ -1,20 +1,11 @@
+import OpenWeatherApi from '@/api/openWeatherApi/index'
 import qs from 'qs'
-import Api from '@/api/api'
 
-const OPEN_WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5'
-const OPEN_WEATHER_API_KEY = '38986857e2045a37441789aa4a9a0757'
+const SINGLE_WEATHER_ENDPOINT = '/weather'
 
-const WEATHER_ENDPOINT = '/weather'
-
-export default class OpenWeatherApi extends Api {
+export default class CurrentWeatherRequest extends OpenWeatherApi {
     constructor() {
         super()
-        this.client.defaults.baseURL = OPEN_WEATHER_API_URL
-
-        /* add query parameter with api key to all requests */
-        this.client.defaults.params = {
-            appid: OPEN_WEATHER_API_KEY
-        }
     }
 
     /**
@@ -22,8 +13,8 @@ export default class OpenWeatherApi extends Api {
      * @param {number} id - The city id
      * @return {Promise<WeatherOneLocation>}
      */
-    async getCurrentWeatherByCityId({ id }) {
-        const { data } = await this.client.get(WEATHER_ENDPOINT, {
+    async getByCityId({ id }) {
+        const { data } = await this.client.get(SINGLE_WEATHER_ENDPOINT, {
             params: {
                 id
             }
@@ -36,8 +27,8 @@ export default class OpenWeatherApi extends Api {
      * @param {string} q - The search by city name parameter
      * @return {Promise<WeatherOneLocation>}
      */
-    async getCurrentWeatherByCityName({ q }) {
-        const { data } = await this.client.get(WEATHER_ENDPOINT, {
+    async getByCityName({ q }) {
+        const { data } = await this.client.get(SINGLE_WEATHER_ENDPOINT, {
             params: {
                 q
             }
@@ -49,7 +40,7 @@ export default class OpenWeatherApi extends Api {
      * @param {Array<number>} ids - City ids
      * @return {Promise<WeatherMultipleLocations>}
      */
-    async getMultipleCitiesCurrentWeatherByCityIds({ ids }) {
+    async listByCityIds({ ids }) {
         const { data } = await this.client.get('/group', {
             params: {
                 id: ids

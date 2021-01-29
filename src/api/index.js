@@ -1,3 +1,3 @@
-import OpenWeatherApi from '@/api/openWeatherApi'
+import currentWeather from '@/api/openWeatherApi/currentWeatherRequest'
 
-export const openWeatherApi = new OpenWeatherApi()
+export const currentWeatherRequest = new currentWeather()
