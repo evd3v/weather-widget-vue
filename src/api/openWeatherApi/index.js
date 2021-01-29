@@ -10,7 +10,8 @@ export default class OpenWeatherApi extends Api {
 
         /* add query parameter with api key to all requests */
         this.client.defaults.params = {
-            appid: OPEN_WEATHER_API_KEY
+            appid: OPEN_WEATHER_API_KEY,
+            units: 'metric'
         }
     }
 }
