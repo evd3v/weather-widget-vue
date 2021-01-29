@@ -9,7 +9,9 @@
   },
   "dependencies": {
     "@ungap/custom-elements": "^0.1.12",
+    "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "qs": "^6.9.6",
     "vue": "^2.6.11",
     "vue-custom-element": "^3.2.14",
     "vue-router": "^3.2.0",
