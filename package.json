@@ -11,8 +11,11 @@
     "@ungap/custom-elements": "^0.1.12",
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
+    "interactjs": "^1.10.2",
     "qs": "^6.9.6",
+    "swiper": "^5.4.5",
     "vue": "^2.6.11",
+    "vue-awesome-swiper": "^4.1.1",
     "vue-custom-element": "^3.2.14",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
@@ -31,6 +34,7 @@
     "prettier": "^1.19.1",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.11"
   }
 }

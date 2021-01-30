@@ -17,7 +17,7 @@ export default new Vuex.Store({
     actions: {
         async init({ commit }) {
             const citiesWeather = await currentWeatherRequest.listByCityIds({
-                ids: [2216885]
+                ids: [2216885, 2212771]
             })
             commit('SET_CITIES_WEATHER', citiesWeather)
         }
