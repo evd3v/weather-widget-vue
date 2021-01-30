@@ -6,15 +6,14 @@
         </div>
         <div
             class="swiper-wrapper"
-            v-if="!fetching && citiesWeather && citiesWeather.cnt"
+            v-if="!fetching && citiesWeather && citiesWeather.length"
         >
             <swiper :options="swiperOptions">
-                <swiper-slide
-                    v-for="cityWeather in citiesWeather.list"
-                    :key="cityWeather.id"
-                >
-                    <CityCard :city-weather="cityWeather" />
-                </swiper-slide>
+                <template v-for="cityWeather in citiesWeather">
+                    <swiper-slide :key="cityWeather.id">
+                        <CityCard :city-weather="cityWeather" />
+                    </swiper-slide>
+                </template>
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
         </div>
@@ -80,7 +79,7 @@ export default {
     border-radius: 5px;
     font-size: 14px;
     width: 300px;
-    height: 250px;
+    height: 300px;
     padding: 20px;
 
     &:hover {
