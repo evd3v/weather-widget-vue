@@ -18,7 +18,9 @@
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
         </div>
-        <template v-else>123</template>
+        <template v-else>
+            <weather-preloader />
+        </template>
     </div>
 </template>
 
@@ -28,10 +30,16 @@ import CloseSolidIcon from '@/assets/images/svg/close-solid.svg?inline'
 
 import CityCard from '@/components/CityCard'
 import { mapState } from 'vuex'
+import WeatherPreloader from '@/components/WeatherPreloader'
 
 export default {
     name: 'Widget',
-    components: { CityCard, SettingsOutlineIcon, CloseSolidIcon },
+    components: {
+        WeatherPreloader,
+        CityCard,
+        SettingsOutlineIcon,
+        CloseSolidIcon
+    },
     props: {
         fetching: {
             type: Boolean,
@@ -104,9 +112,11 @@ export default {
         &:hover {
             cursor: pointer;
         }
-
-        .swiper-pagination {
-            bottom: 0;
+    }
+    .swiper-pagination::v-deep {
+        bottom: 0;
+        span {
+            background: #75d6ff;
         }
     }
 }

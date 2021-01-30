@@ -44,7 +44,9 @@ export default {
     async mounted() {
         this.fetching = true
         await this.init()
-        this.fetching = false
+        setTimeout(() => {
+            this.fetching = false
+        }, 2000)
     }
 }
 </script>
