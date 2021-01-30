@@ -14,16 +14,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@keyframes rotate {
-    0% {
-        transform: rotateZ(0deg);
-    }
-
-    100% {
-        transform: rotateZ(360deg);
-    }
-}
-
 .weather-preloader {
     position: absolute;
     top: 0;

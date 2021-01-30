@@ -14,7 +14,11 @@ export default new Vuex.Store({
             state.citiesWeather = citiesWeather
         },
         ADD_CITY_WEATHER(state, cityWeather) {
-            state.citiesWeather.push(cityWeather)
+            if (state.citiesWeather) {
+                state.citiesWeather.push(cityWeather)
+            } else {
+                state.citiesWeather = [cityWeather]
+            }
         },
         REMOVE_CITY_WEATHER(state, cityWeatherId) {
             state.citiesWeather = state.citiesWeather.filter(
@@ -25,7 +29,7 @@ export default new Vuex.Store({
     actions: {
         async init({ commit }) {
             const citiesWeather = await currentWeatherRequest.listByCityIds({
-                ids: [2216885, 2212771, 2563191, 2210247, 2215163, 2219905]
+                ids: []
             })
             commit('SET_CITIES_WEATHER', citiesWeather.list)
         }

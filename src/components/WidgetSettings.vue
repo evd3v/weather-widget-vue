@@ -5,14 +5,21 @@
             <close-solid-icon @click="closeSettings" />
         </div>
         <div class="widget-settings-cities custom-scrollbar">
-            <draggable v-model="citiesList">
-                <city-settings-card
-                    v-for="cityWeather in citiesList"
-                    :key="cityWeather.id"
-                    :city-weather="cityWeather"
-                    @remove="removeHandler"
-                />
-            </draggable>
+            <template v-if="citiesList">
+                <draggable v-model="citiesList">
+                    <city-settings-card
+                        v-for="cityWeather in citiesList"
+                        :key="cityWeather.id"
+                        :city-weather="cityWeather"
+                        @remove="removeHandler"
+                    />
+                </draggable>
+            </template>
+            <template v-else>
+                <div class="widget-settings-cities-empty">
+                    it's empty here...
+                </div>
+            </template>
         </div>
         <div class="widget-settings-search">
             <search-city-input
@@ -92,7 +99,6 @@ export default {
 
     &::-webkit-scrollbar-thumb {
         background-color: #d0d0d0;
-        //outline: 1px solid #d0d0d0;
     }
 }
 
@@ -126,6 +132,15 @@ export default {
         height: 150px;
         margin-top: 10px;
         padding-right: 10px;
+
+        &-empty {
+            font-size: 20px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #75d6ff;
+        }
     }
 
     &-search {

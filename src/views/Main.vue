@@ -52,16 +52,12 @@ export default {
     },
     async mounted() {
         this.fetching = true
-        await this.init()
-        this.fetching = false
-        // setTimeout(() => {
-        //     this.fetching = false
-        // }, 2000)
+        await this.init().finally(() => (this.fetching = false))
     }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 * {
     box-sizing: border-box;
 }
@@ -72,6 +68,16 @@ export default {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
     opacity: 0;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotateZ(0deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
 
 .widget-wrapper {
@@ -85,6 +91,11 @@ export default {
 
         &:hover {
             cursor: pointer;
+            path:first-child {
+                transform-box: fill-box;
+                transform-origin: center;
+                animation: rotate 8s infinite linear;
+            }
         }
     }
 }

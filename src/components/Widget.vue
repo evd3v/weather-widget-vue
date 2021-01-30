@@ -17,6 +17,15 @@
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
         </div>
+        <template v-else-if="!citiesWeather">
+            <div class="widget-empty">
+                <span class="widget-empty-description">
+                    You haven't any configured cities yet. Do you want to add a
+                    new one?
+                </span>
+                <base-button label="open settings" @click="openSettings" />
+            </div>
+        </template>
         <template v-else>
             <weather-preloader />
         </template>
@@ -30,10 +39,12 @@ import CloseSolidIcon from '@/assets/images/svg/close-solid.svg?inline'
 import CityCard from '@/components/CityCard'
 import { mapState } from 'vuex'
 import WeatherPreloader from '@/components/WeatherPreloader'
+import BaseButton from '@/components/BaseButton'
 
 export default {
     name: 'Widget',
     components: {
+        BaseButton,
         WeatherPreloader,
         CityCard,
         SettingsOutlineIcon,
@@ -104,6 +115,18 @@ export default {
             &:hover {
                 cursor: pointer;
             }
+        }
+    }
+
+    &-empty {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        &-description {
+            text-align: center;
+            margin-bottom: 10px;
         }
     }
 
