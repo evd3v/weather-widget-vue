@@ -95,7 +95,8 @@ export default {
     margin-bottom: 30px;
     user-select: none;
     .city-name {
-        font-size: 14px;
+        color: #622a20;
+        font-size: 16px;
         font-weight: 600;
     }
 
@@ -108,13 +109,14 @@ export default {
             width: 100px;
         }
         &-degrees {
-            font-size: 26px;
+            font-size: 32px;
             font-weight: 700;
+            color: #447ba4;
         }
     }
 
     .description {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .parameters {
@@ -128,7 +130,7 @@ export default {
             position: relative;
             display: flex;
             align-items: center;
-            font-size: 10px;
+            font-size: 12px;
         }
     }
 

@@ -86,7 +86,7 @@ export default {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    border: 1px solid #88a3b2;
     border-radius: 5px;
     font-size: 14px;
     width: 300px;
@@ -97,6 +97,12 @@ export default {
         .widget-header {
             visibility: visible;
             opacity: 1;
+        }
+    }
+
+    svg {
+        path {
+            fill: #212528;
         }
     }
 
@@ -138,7 +144,7 @@ export default {
     .swiper-pagination::v-deep {
         bottom: 0;
         span {
-            background: #75d6ff;
+            background: #447ba4;
         }
     }
 }

@@ -48,8 +48,13 @@ export default {
     margin-top: 10px;
     height: 40px;
     padding: 0 20px;
-    background: #ccc;
+    background: #88a3b2;
     user-select: none;
+
+    &-name {
+        color: #fff;
+    }
+
     &-reorder {
         display: flex;
         margin-right: 10px;
@@ -59,7 +64,9 @@ export default {
         }
     }
     &-remove {
+        display: flex;
         margin-left: auto;
+        align-items: center;
         &:hover {
             cursor: pointer;
         }

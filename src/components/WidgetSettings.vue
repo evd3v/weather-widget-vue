@@ -125,6 +125,11 @@ export default {
                 cursor: pointer;
             }
         }
+
+        &-title {
+            color: #622a20;
+            font-weight: 600;
+        }
     }
 
     &-cities {
@@ -139,7 +144,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #75d6ff;
+            color: #447ba4;
         }
     }
 

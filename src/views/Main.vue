@@ -85,8 +85,10 @@ export default {
     bottom: 30px;
     right: 30px;
     .closed-widget {
+        width: 70px;
+        height: 70px;
         padding: 10px;
-        border: 1px solid #75d6ff;
+        border: 1px solid #447ba4;
         border-radius: 50%;
 
         &:hover {

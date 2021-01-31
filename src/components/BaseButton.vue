@@ -27,12 +27,12 @@ export default {
 .base-button {
     position: relative;
     font-family: inherit;
-    border: 1px solid #75d6ff;
+    border: 1px solid #447ba4;
     line-height: 30px;
     height: 30px;
     font-size: 14px;
     color: #fff;
-    background: #75d6ff;
+    background: #447ba4;
     border-radius: 5px;
     padding: 0 30px;
     display: flex;

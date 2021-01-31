@@ -69,8 +69,7 @@ export default {
 .search-city-input {
     margin-bottom: 5px;
     &-label {
-        font-size: 12px;
-        font-weight: 600;
+        font-size: 14px;
     }
     &-field {
         margin-top: 5px;
@@ -82,6 +81,11 @@ export default {
             height: 30px;
             padding: 0 10px;
             font-size: 16px;
+            border: 1px solid #88a3b2;
+
+            &:focus {
+                outline: none;
+            }
         }
         svg {
             &:hover {
@@ -92,7 +96,7 @@ export default {
     &-error {
         position: absolute;
         font-size: 12px;
-        color: red;
+        color: #e06e1a;
     }
 }
 </style>
