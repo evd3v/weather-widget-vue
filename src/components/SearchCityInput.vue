@@ -10,9 +10,6 @@
             />
             <arrow-return-left-solid-icon @click="searchHandler" />
         </div>
-        <div class="search-city-input-error">
-            {{ error }}
-        </div>
     </div>
 </template>
 
@@ -25,6 +22,10 @@ export default {
         ArrowReturnLeftSolidIcon
     },
     props: {
+        value: {
+            type: String,
+            required: true
+        },
         label: {
             type: String,
             default: ''
@@ -38,10 +39,14 @@ export default {
             required: true
         }
     },
-    data() {
-        return {
-            searchString: '',
-            error: ''
+    computed: {
+        searchString: {
+            get() {
+                return this.value
+            },
+            set(value) {
+                this.$emit('input', value)
+            }
         }
     },
     methods: {
@@ -54,7 +59,7 @@ export default {
                     this.$emit('success', result)
                     this.searchString = ''
                 } catch (e) {
-                    this.error = e.response.data.message
+                    this.$emit('error', e.response.data.message)
                 }
             }
         },
@@ -92,11 +97,6 @@ export default {
                 cursor: pointer;
             }
         }
-    }
-    &-error {
-        position: absolute;
-        font-size: 12px;
-        color: #e06e1a;
     }
 }
 </style>

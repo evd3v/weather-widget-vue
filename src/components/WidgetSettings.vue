@@ -24,9 +24,11 @@
         <div class="widget-settings-search">
             <search-city-input
                 label="Add location:"
+                v-model="searchCityStr"
                 :search-function="searchFunction"
                 search-field="q"
                 @success="searchedHandler"
+                @error="errorSearchHandler"
             />
             <div class="widget-settings-search-error">
                 {{ error }}
@@ -68,7 +70,15 @@ export default {
             searchFunction: currentWeatherRequest.getByCityName.bind(
                 currentWeatherRequest
             ),
+            searchCityStr: '',
             error: ''
+        }
+    },
+    watch: {
+        searchCityStr: {
+            handler() {
+                this.error = ''
+            }
         }
     },
     methods: {
@@ -81,17 +91,26 @@ export default {
             this.$emit('close')
         },
         searchedHandler(result) {
-            const idx = this.citiesWeather.findIndex(
-                (cityWeather) => Number(cityWeather.id) === result.id
-            )
+            let idx = -1
+            if (this.citiesWeather && this.citiesWeather.length) {
+                idx = this.citiesWeather.findIndex(
+                    (cityWeather) => Number(cityWeather.id) === result.id
+                )
+            }
+
             if (idx === -1) {
                 this.ADD_CITY_WEATHER(result)
             } else {
-                this.error = 'This city is already added'
+                setTimeout(() => {
+                    this.error = 'This city is already added'
+                })
             }
         },
         removeHandler(id) {
             this.REMOVE_CITY_WEATHER(id)
+        },
+        errorSearchHandler(error) {
+            this.error = error
         }
     }
 }
@@ -161,6 +180,11 @@ export default {
 
     &-search {
         margin-top: auto;
+        &-error {
+            position: absolute;
+            font-size: 12px;
+            color: #e06e1a;
+        }
     }
 }
 </style>
