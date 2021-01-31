@@ -17,7 +17,7 @@
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
         </div>
-        <template v-else-if="!citiesWeather">
+        <template v-else-if="!citiesWeather && !fetching">
             <div class="widget-empty">
                 <span class="widget-empty-description">
                     You haven't any configured cities yet. Do you want to add a
