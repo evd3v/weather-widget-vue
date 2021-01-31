@@ -1,4 +1,7 @@
 module.exports = {
+    devServer: {
+        https: true
+    },
     chainWebpack: (config) => {
         /* Make built code as single js file */
         config.optimization.delete('splitChunks')

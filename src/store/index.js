@@ -3,7 +3,6 @@ import Vuex from 'vuex'
 import VuexPersistence from 'vuex-persist'
 
 import { currentWeatherRequest } from '@/api'
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -31,11 +30,27 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async init({ state, commit }) {
-            const citiesWeather = await currentWeatherRequest.listByCityIds({
-                ids: [state.citiesWeatherIds]
+        async init({ state, commit, dispatch }) {
+            if (!state.citiesWeatherIds.length) {
+                dispatch('getGeoLocationCoordinates')
+            } else {
+                const citiesWeather = await currentWeatherRequest.listByCityIds(
+                    {
+                        ids: [state.citiesWeatherIds]
+                    }
+                )
+                commit('SET_CITIES_WEATHER', citiesWeather.list)
+            }
+        },
+        getGeoLocationCoordinates({ commit }) {
+            navigator.geolocation.getCurrentPosition(async (result) => {
+                const { latitude, longitude } = result.coords
+                const citiWeather = await currentWeatherRequest.getByCoordinates(
+                    latitude,
+                    longitude
+                )
+                commit('ADD_CITY_WEATHER', citiWeather)
             })
-            commit('SET_CITIES_WEATHER', citiesWeather.list)
         }
     },
     modules: {},

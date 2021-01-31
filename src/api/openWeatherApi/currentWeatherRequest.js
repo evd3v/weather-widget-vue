@@ -51,4 +51,14 @@ export default class CurrentWeatherRequest extends OpenWeatherApi {
 
         return data
     }
+
+    async getByCoordinates(lat, lon) {
+        const { data } = await this.client.get('/weather', {
+            params: {
+                lat,
+                lon
+            }
+        })
+        return data
+    }
 }
