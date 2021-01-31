@@ -28,6 +28,9 @@
                 search-field="q"
                 @success="searchedHandler"
             />
+            <div class="widget-settings-search-error">
+                {{ error }}
+            </div>
         </div>
     </div>
 </template>
@@ -50,7 +53,7 @@ export default {
         Draggable
     },
     computed: {
-        ...mapState(['citiesWeather']),
+        ...mapState(['citiesWeather', 'citiesWeatherIds']),
         citiesList: {
             get() {
                 return this.citiesWeather
@@ -64,7 +67,8 @@ export default {
         return {
             searchFunction: currentWeatherRequest.getByCityName.bind(
                 currentWeatherRequest
-            )
+            ),
+            error: ''
         }
     },
     methods: {
@@ -77,7 +81,14 @@ export default {
             this.$emit('close')
         },
         searchedHandler(result) {
-            this.ADD_CITY_WEATHER(result)
+            const idx = this.citiesWeather.findIndex(
+                (cityWeather) => Number(cityWeather.id) === result.id
+            )
+            if (idx === -1) {
+                this.ADD_CITY_WEATHER(result)
+            } else {
+                this.error = 'This city is already added'
+            }
         },
         removeHandler(id) {
             this.REMOVE_CITY_WEATHER(id)

@@ -17,7 +17,12 @@
                 <div class="swiper-pagination" slot="pagination"></div>
             </swiper>
         </div>
-        <template v-else-if="!citiesWeather && !fetching">
+        <template
+            v-else-if="
+                (!citiesWeather || (citiesWeather && !citiesWeather.length)) &&
+                    !fetching
+            "
+        >
             <div class="widget-empty">
                 <span class="widget-empty-description">
                     You haven't any configured cities yet. Do you want to add a
@@ -26,7 +31,7 @@
                 <base-button label="open settings" @click="openSettings" />
             </div>
         </template>
-        <template v-else>
+        <template v-else-if="fetching">
             <weather-preloader />
         </template>
     </div>
