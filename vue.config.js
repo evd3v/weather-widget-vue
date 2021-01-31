@@ -31,5 +31,6 @@ module.exports = {
                 }
             })
     },
-    filenameHashing: false
+    filenameHashing: false,
+    transpileDependencies: ['vuex-persist']
 }

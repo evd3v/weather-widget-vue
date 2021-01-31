@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VuexPersistence from 'vuex-persist'
+
 import { currentWeatherRequest } from '@/api'
 
 Vue.use(Vuex)
@@ -7,7 +9,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         /** @type {Array<WeatherOneLocation>} | null */
-        citiesWeather: null
+        citiesWeather: null,
+        /** @type {Array<number>} */
+        citiesWeatherIds: []
     },
     mutations: {
         SET_CITIES_WEATHER(state, citiesWeather) {
@@ -27,12 +31,21 @@ export default new Vuex.Store({
         }
     },
     actions: {
-        async init({ commit }) {
+        async init({ state, commit }) {
             const citiesWeather = await currentWeatherRequest.listByCityIds({
-                ids: []
+                ids: [state.citiesWeatherIds]
             })
             commit('SET_CITIES_WEATHER', citiesWeather.list)
         }
     },
-    modules: {}
+    modules: {},
+    plugins: [
+        new VuexPersistence({
+            reducer: (state) => ({
+                citiesWeatherIds: state.citiesWeather.map(
+                    (cityWeather) => cityWeather.id
+                )
+            })
+        }).plugin
+    ]
 })

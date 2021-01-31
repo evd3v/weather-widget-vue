@@ -22,7 +22,7 @@
 <script>
 import SunWithCloudColorIcon from '@/assets/images/svg/sun-with-cloud-color.svg?inline'
 
-import { mapActions, mapState } from 'vuex'
+import { mapActions } from 'vuex'
 
 import Widget from '@/components/Widget'
 import WidgetSettings from '@/components/WidgetSettings'
