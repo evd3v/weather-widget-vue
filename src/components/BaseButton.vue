@@ -27,12 +27,12 @@ export default {
 .base-button {
     position: relative;
     font-family: inherit;
-    border: 1px solid #447ba4;
+    border: 1px solid var(--weather-widget-main-blue);
     line-height: 30px;
     height: 30px;
     font-size: 14px;
-    color: #fff;
-    background: #447ba4;
+    color: var(--weather-widget-white);
+    background: var(--weather-widget-main-blue);
     border-radius: 5px;
     padding: 0 30px;
     display: flex;

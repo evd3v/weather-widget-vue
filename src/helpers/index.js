@@ -1,7 +1,8 @@
 import { compassSectors } from '@/const'
 
 /**
- * @param {string} str
+ * Returns string with capitalized first character
+ * @param {string} str - Initial string
  * @return {string}
  */
 export const capitalizeFirstLetter = (str) => {
@@ -9,6 +10,7 @@ export const capitalizeFirstLetter = (str) => {
 }
 
 /**
+ * Returns direction shortcut name by degree
  * @param {number} degree
  */
 export const getWindDirectionText = (degree) => {

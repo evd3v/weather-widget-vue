@@ -5,8 +5,8 @@
             <settings-outline-icon @click="openSettings" />
         </div>
         <div
-            class="swiper-wrapper"
             v-if="!fetching && citiesWeather && citiesWeather.length"
+            class="widget-swiper-wrapper"
         >
             <swiper :options="swiperOptions">
                 <template v-for="cityWeather in citiesWeather">
@@ -14,7 +14,7 @@
                         <CityCard :city-weather="cityWeather" />
                     </swiper-slide>
                 </template>
-                <div class="swiper-pagination" slot="pagination"></div>
+                <div slot="pagination" class="swiper-pagination"></div>
             </swiper>
         </div>
         <template
@@ -61,9 +61,6 @@ export default {
             default: true
         }
     },
-    computed: {
-        ...mapState(['citiesWeather'])
-    },
     data() {
         return {
             swiperOptions: {
@@ -74,6 +71,9 @@ export default {
                 spaceBetween: 30
             }
         }
+    },
+    computed: {
+        ...mapState(['citiesWeather'])
     },
     methods: {
         closeWidget() {
@@ -87,15 +87,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//@import '~swiper/css/swiper.css';
+
 .widget {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    border: 1px solid #88a3b2;
+    border: 1px solid var(--weather-widget-dark-grayish-blue);
     border-radius: 5px;
     font-size: 14px;
-    width: 300px;
-    height: 300px;
+    width: var(--weather-widget-width);
+    height: var(--weather-widget-height);
     padding: 20px;
 
     &:hover {
@@ -105,6 +107,7 @@ export default {
         }
     }
 
+    /** change main color for all svg icons inside widget */
     svg {
         path {
             fill: #212528;
@@ -141,15 +144,16 @@ export default {
         }
     }
 
-    .swiper-wrapper {
+    &-swiper-wrapper {
+        .swiper-pagination::v-deep {
+            bottom: 0;
+            span {
+                background: var(--weather-widget-main-blue);
+            }
+        }
+
         &:hover {
             cursor: pointer;
-        }
-    }
-    .swiper-pagination::v-deep {
-        bottom: 0;
-        span {
-            background: #447ba4;
         }
     }
 }

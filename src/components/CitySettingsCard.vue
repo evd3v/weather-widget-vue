@@ -29,7 +29,6 @@ export default {
     },
     computed: {
         cityTitle() {
-            console.log(this.cityWeather)
             return `${this.cityWeather.name}, ${this.cityWeather.sys.country}`
         }
     },
@@ -48,11 +47,14 @@ export default {
     margin-top: 10px;
     height: 40px;
     padding: 0 20px;
-    background: #88a3b2;
+    background: var(--weather-widget-dark-grayish-blue);
     user-select: none;
 
     &-name {
-        color: #fff;
+        color: var(--weather-widget-white);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 
     &-reorder {

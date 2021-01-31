@@ -31,6 +31,8 @@ export default new Vuex.Store({
     },
     actions: {
         async init({ state, commit, dispatch }) {
+            /** if we have not any cities yet, make request for users coordinates */
+
             if (!state.citiesWeatherIds.length) {
                 dispatch('getGeoLocationCoordinates')
             } else {
@@ -55,8 +57,10 @@ export default new Vuex.Store({
     },
     modules: {},
     plugins: [
+        /** vuex plugin for save state in localStorage */
         new VuexPersistence({
             reducer: (state) => ({
+                /** save citiesIds to localStorage before page closed/reloaded */
                 citiesWeatherIds: state.citiesWeather.map(
                     (cityWeather) => cityWeather.id
                 )

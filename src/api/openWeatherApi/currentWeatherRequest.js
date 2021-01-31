@@ -1,6 +1,7 @@
 import OpenWeatherApi from '@/api/openWeatherApi/index'
 import qs from 'qs'
 
+/** url inside OpenWeather API for getting only one CityWeather */
 const SINGLE_WEATHER_ENDPOINT = '/weather'
 
 export default class CurrentWeatherRequest extends OpenWeatherApi {
@@ -9,7 +10,7 @@ export default class CurrentWeatherRequest extends OpenWeatherApi {
     }
 
     /**
-     * Returns the weather object by city id
+     * Returns the CityWeather object by city id
      * @param {number} id - The city id
      * @return {Promise<WeatherOneLocation>}
      */
@@ -23,7 +24,7 @@ export default class CurrentWeatherRequest extends OpenWeatherApi {
     }
 
     /**
-     * Returns the weather object by city name
+     * Returns the CityWeather object by city name
      * @param {string} q - The search by city name parameter
      * @return {Promise<WeatherOneLocation>}
      */
@@ -37,6 +38,7 @@ export default class CurrentWeatherRequest extends OpenWeatherApi {
     }
 
     /**
+     * Returns list of CitiesWeather objects by list of city ids
      * @param {Array<number>} ids - City ids
      * @return {Promise<WeatherMultipleLocations>}
      */
@@ -52,6 +54,12 @@ export default class CurrentWeatherRequest extends OpenWeatherApi {
         return data
     }
 
+    /**
+     * Returns the CityWeather object by coordinates
+     * @param {number} lat - latitude coordinate
+     * @param {number} lon - longitude coordinate
+     * @return {Promise<WeatherMultipleLocations>}
+     */
     async getByCoordinates(lat, lon) {
         const { data } = await this.client.get('/weather', {
             params: {

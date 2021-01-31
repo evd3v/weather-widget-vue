@@ -1,43 +1,47 @@
 <template>
     <div class="city-card">
-        <div class="city-name">
+        <div class="city-card-name">
             <span> {{ cityWeather.name }}, </span>
-            <span>{{ cityWeather.sys.country }}</span>
+            <span> {{ cityWeather.sys.country }} </span>
         </div>
-        <div class="weather">
-            <img class="weather-icon" :src="iconURL" />
-            <span class="weather-degrees">
+        <div class="city-card-weather">
+            <img class="city-card-weather-icon" :src="iconURL" />
+            <span class="city-card-weather-degrees">
                 {{ cityWeather.main.temp.toFixed(0) }}&deg;C
             </span>
         </div>
-        <div class="description">
+        <div class="city-card-description">
             {{ description }}
         </div>
-        <div class="parameters">
-            <div class="left-side">
-                <div class="parameters-item wind">
+        <div class="city-card-parameters">
+            <div class="city-card-parameters-column">
+                <div
+                    class="city-card-parameters-column-item city-card-parameters-column-item-wind"
+                >
                     <span
-                        class="wind-direction-icon"
+                        class="city-card-parameters-column-item-wind-direction-icon"
                         :style="windDirectionRotateStyle"
                     >
                         <direction-solid-icon />
                     </span>
-                    <span class="wind-speed">
-                        {{ cityWeather.wind.speed.toFixed(1) }}m/s
+                    <span class="city-card-parameters-column-item-wind-speed">
+                        {{ cityWeather.wind.speed.toFixed(1) }} m/s
                     </span>
-                    <span class="wind-direction-description">
+                    <span
+                        class="city-card-parameters-column-item-wind-direction-description"
+                    >
                         {{ windDirection }}</span
                     >
                 </div>
-                <div class="parameters-item humidity">
+                <div class="city-card-parameters-column-item humidity">
                     Humidity: {{ cityWeather.main.humidity }} %
                 </div>
             </div>
-            <div class="right-side">
-                <div class="parameters-item pressure">
-                    <span>Pressure: {{ cityWeather.main.pressure }}hPa</span>
+            <div class="city-card-parameters-column">
+                <div class="city-card-parameters-column-item pressure">
+                    <span>Pressure: {{ cityWeather.main.pressure }} hPa</span>
                 </div>
-                <div class="parameters-item visibility">
+                <div class="city-card-parameters-column-item visibility">
                     Visibility:
                     {{ (cityWeather.visibility / 1000).toFixed(1) }} km
                 </div>
@@ -63,8 +67,15 @@ export default {
             required: true
         }
     },
+    data() {
+        return {
+            /** base URL for OpenWeather API weather images */
+            iconBaseURL: 'https://openweathermap.org/img/wn/'
+        }
+    },
     computed: {
         iconURL() {
+            /** @2x - uses for returning image with 2 times more size than original */
             return `${this.iconBaseURL}${this.cityWeather.weather[0].icon}@2x.png`
         },
         description() {
@@ -81,11 +92,6 @@ export default {
         windDirectionRotateStyle() {
             return `transform: rotate(${this.cityWeather.wind.deg}deg)`
         }
-    },
-    data() {
-        return {
-            iconBaseURL: 'https://openweathermap.org/img/wn/'
-        }
     }
 }
 </script>
@@ -94,13 +100,13 @@ export default {
 .city-card {
     margin-bottom: 30px;
     user-select: none;
-    .city-name {
-        color: #622a20;
+    &-name {
+        color: var(--weather-widget-very-dark-red);
         font-size: 16px;
         font-weight: 600;
     }
 
-    .weather {
+    &-weather {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -111,42 +117,44 @@ export default {
         &-degrees {
             font-size: 32px;
             font-weight: 700;
-            color: #447ba4;
+            color: var(--weather-widget-main-blue);
         }
     }
 
-    .description {
+    &-description {
         font-size: 14px;
     }
 
-    .parameters {
+    &-parameters {
         display: flex;
         justify-content: space-between;
-        .left-side {
-            margin-right: 15px;
-        }
-        &-item {
-            margin-top: 10px;
-            position: relative;
-            display: flex;
-            align-items: center;
-            font-size: 12px;
-        }
-    }
+        &-column {
+            &:first-child {
+                margin-right: 15px;
+            }
 
-    .wind {
-        &-direction-icon {
-            position: absolute;
-            width: 23px;
-            height: 23px;
-            transition: ease-in-out 0.2s;
-        }
+            &-item {
+                margin-top: 10px;
+                position: relative;
+                display: flex;
+                align-items: center;
+                font-size: 12px;
+                &-wind {
+                    &-direction-icon {
+                        position: absolute;
+                        width: 23px;
+                        height: 23px;
+                        transition: ease-in-out 0.2s;
+                    }
 
-        &-speed {
-            margin-left: 30px;
-        }
-        &-direction-description {
-            margin-left: 10px;
+                    &-speed {
+                        margin-left: 30px;
+                    }
+                    &-direction-description {
+                        margin-left: 10px;
+                    }
+                }
+            }
         }
     }
 }

@@ -23,8 +23,8 @@
         </div>
         <div class="widget-settings-search">
             <search-city-input
-                label="Add location:"
                 v-model="searchCityStr"
+                label="Add location:"
                 :search-function="searchFunction"
                 search-field="q"
                 @success="searchedHandler"
@@ -54,6 +54,15 @@ export default {
         CloseSolidIcon,
         Draggable
     },
+    data() {
+        return {
+            searchFunction: currentWeatherRequest.getByCityName.bind(
+                currentWeatherRequest
+            ),
+            searchCityStr: '',
+            error: ''
+        }
+    },
     computed: {
         ...mapState(['citiesWeather', 'citiesWeatherIds']),
         citiesList: {
@@ -63,15 +72,6 @@ export default {
             set(value) {
                 this.SET_CITIES_WEATHER(value)
             }
-        }
-    },
-    data() {
-        return {
-            searchFunction: currentWeatherRequest.getByCityName.bind(
-                currentWeatherRequest
-            ),
-            searchCityStr: '',
-            error: ''
         }
     },
     watch: {
@@ -117,33 +117,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.custom-scrollbar {
-    &::-webkit-scrollbar {
-        width: 3px;
-        border-radius: 100%;
-    }
-
-    &::-webkit-scrollbar-track {
-        background-color: #f5f5f5;
-    }
-
-    &::-webkit-scrollbar-thumb {
-        background-color: #d0d0d0;
-    }
-}
-
 .widget-settings {
     position: absolute;
     top: 1px;
     left: 1px;
     right: 1px;
-    height: 298px;
+    height: calc(var(--weather-widget-height) - 2px);
     padding: 20px;
-    width: 298px;
+    width: calc(var(--weather-widget-width) - 2px);
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    background: #fff;
+    background: var(--weather-widget-white);
     z-index: 1;
 
     &-header {
@@ -157,7 +142,7 @@ export default {
         }
 
         &-title {
-            color: #622a20;
+            color: var(--weather-widget-very-dark-red);
             font-weight: 600;
         }
     }
@@ -174,7 +159,7 @@ export default {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #447ba4;
+            color: var(--weather-widget-main-blue);
         }
     }
 
@@ -183,7 +168,7 @@ export default {
         &-error {
             position: absolute;
             font-size: 12px;
-            color: #e06e1a;
+            color: var(--weather-widget-vivid-orange);
         }
     }
 }

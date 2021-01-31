@@ -1,3 +1,4 @@
+/** compass sectors shortcut names from north to north */
 export const compassSectors = [
     'N',
     'NNE',

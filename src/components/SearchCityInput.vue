@@ -3,10 +3,9 @@
         <div class="search-city-input-label">{{ label }}</div>
         <div class="search-city-input-field">
             <input
-                type="text"
                 v-model="searchString"
+                type="text"
                 @keydown.enter="searchHandler"
-                @input="inputHandler"
             />
             <arrow-return-left-solid-icon @click="searchHandler" />
         </div>
@@ -62,9 +61,6 @@ export default {
                     this.$emit('error', e.response.data.message)
                 }
             }
-        },
-        inputHandler() {
-            this.error = ''
         }
     }
 }
@@ -86,7 +82,7 @@ export default {
             height: 30px;
             padding: 0 10px;
             font-size: 16px;
-            border: 1px solid #88a3b2;
+            border: 1px solid var(--weather-widget-dark-grayish-blue);
 
             &:focus {
                 outline: none;

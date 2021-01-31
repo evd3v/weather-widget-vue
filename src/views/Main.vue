@@ -13,7 +13,7 @@
                 />
             </transition>
         </template>
-        <div class="closed-widget" @click="toggleWidgetState" v-else>
+        <div v-else class="widget-wrapper-closed" @click="toggleWidgetState">
             <sun-with-cloud-color-icon />
         </div>
     </div>
@@ -37,9 +37,13 @@ export default {
     data() {
         return {
             fetching: true,
-            widgetState: true,
+            widgetState: false,
             settingsState: false
         }
+    },
+    async mounted() {
+        this.fetching = true
+        await this.init().finally(() => (this.fetching = false))
     },
     methods: {
         ...mapActions(['init']),
@@ -49,46 +53,20 @@ export default {
         toggleWidgetState() {
             this.widgetState = !this.widgetState
         }
-    },
-    async mounted() {
-        this.fetching = true
-        await this.init().finally(() => (this.fetching = false))
     }
 }
 </script>
 
-<style lang="scss">
-* {
-    box-sizing: border-box;
-}
-
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.4s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active до версии 2.1.8 */ {
-    opacity: 0;
-}
-
-@keyframes rotate {
-    0% {
-        transform: rotateZ(0deg);
-    }
-
-    100% {
-        transform: rotateZ(360deg);
-    }
-}
-
+<style lang="scss" scoped>
 .widget-wrapper {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    .closed-widget {
+    &-closed {
         width: 70px;
         height: 70px;
         padding: 10px;
-        border: 1px solid #447ba4;
+        border: 1px solid var(--weather-widget-main-blue);
         border-radius: 50%;
 
         &:hover {
