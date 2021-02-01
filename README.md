@@ -4,7 +4,7 @@
 ## CDN widget
 You can just add script to your html file
 ```
-<script src="http://46.72.75.254:33333/evd3v-weather-widget/app.js"></script>
+<script src="http://46.72.64.108:33333/evd3v-weather-widget/app.js"></script>
 ```
 
 ## Example
@@ -19,7 +19,7 @@ You can just add script to your html file
 <body>
  <weather-widget></weather-widget>
  <!-- widget source js -->
- <script src="http://46.72.75.254:33333/evd3v-weather-widget/app.js"></script>
+ <script src="http://46.72.64.108:33333/evd3v-weather-widget/app.js"></script>
 </body>
 </html>
 ```
